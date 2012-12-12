@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+var dd = require("../lib/dox-docco"),
+  commander = require("commander");

@@ -1,0 +1,33 @@
+{
+  "name": "dox-docco",
+  "version": "0.0.1",
+  "description": "A docco-like formatter for the dox comment parser",
+  "main": "lib/dox-docco.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aearly/dox-docco.git"
+  },
+  "keywords": [
+    "comments",
+    "documentation",
+    "dox",
+    "docco",
+    "template",
+    "dust"
+  ],
+  "author": "Alexander Early <alexander.early@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dox": "~0.4.1",
+    "dust.js": "~0.1.0",
+    "commander": "~1.1.1",
+    "lodash": "~1.0.0-rc.2"
+  },
+  "devDependencies": {
+    "expect.js": "~0.2.0",
+    "mocha": "~1.7.4"
+  }
+}

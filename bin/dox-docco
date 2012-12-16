@@ -1,4 +1,39 @@
 #!/usr/bin/env node
 
-var dd = require("../lib/dox-docco"),
-  commander = require("commander");
+var parse = require("../lib/dox-docco"),
+  program = require("commander"),
+  fs = require("fs"),
+  join = require("path").join,
+  stdin = "",
+  writeOutput = function (err, buffer) {
+    if (err) {
+      return console.error(err.message);
+    }
+    if (program.outfile) {
+      fs.writeFileSync(program.outfile, buffer);
+    } else {
+      console.log(buffer);
+    }
+  };
+
+program
+  .version(JSON.parse(fs.readFileSync(join(__dirname, "..", "package.json"))).version)
+  .option("-o --outfile [outfile]", "the file to output to.  Default is stdout")
+  .option("-n --infile [infile]", "the file to read in.  Deafult is stdin")
+  .option("-c --css [css]", "The css file to use.  Default is github hosted static/docco.css.")
+  .option("-t --template [template]", "The dust template to use.  Default is static/template.html.")
+  .option("-p --pygments", "parse code blocks with pygments")
+  .parse(process.argv);
+
+
+if (program.infile) {
+  program.buffer = fs.readFileSync(program.infile);
+  parse(program, writeOutput);
+} else {
+  process.stdin.setEncoding("utf-8");
+  process.stdin.on("data", function (data) {stdin += data; });
+  process.stdin.on("end", function () {
+    program.buffer = stdin;
+    parse(program, writeOutput);
+  }).resume();
+}

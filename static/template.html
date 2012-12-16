@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>
+            {filename}
+        </title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" media="all" href="https://raw.github.com/aearly/dox-docco/master/static/docco.css" />
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="background">
+            </div>
+            <table cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="docs">
+                            <h1>
+                                {filename}
+                            </h1>
+                        </th>
+                        <th class="code">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {#entries}
+                    <tr id="section-{@idx}{.}{/idx}">
+                        <td class="docs">
+                            <div class="pilwrap">
+                                <a class="pilcrow" href="#section-{@idx}{.}{/idx}">&#182;</a>
+                            </div>
+                            {description.full|s}
+                        <td class="code">
+                            <div class="highlight">
+                                <pre lang="javascript">
+                                  {code}
+                                </pre>
+                            </div>
+                        </td>
+                    </tr>
+                  {/entries}
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+</html>

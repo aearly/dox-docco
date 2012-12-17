@@ -1,8 +1,9 @@
 {
   "name": "dox-docco",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A docco-like formatter for the dox comment parser",
   "main": "lib/dox-docco.js",
+  "bin": "bin/dox-docco",
   "scripts": {
     "test": "mocha"
   },

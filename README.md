@@ -3,6 +3,7 @@ dox-docco
 
 A docco-like formatter for the dox comment parser
 
+[![Build Status](https://travis-ci.org/aearly/dox-docco.png)](https://travis-ci.org/aearly/dox-docco)
 
 How does this differ from Docco?
 --------------------------------

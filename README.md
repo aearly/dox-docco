@@ -13,6 +13,8 @@ For pygments support, install `python-setuptools`, then
 
 `sudo easy_install pygments`
 
+If pygments is not installed, syntax highlighting will be skipped.
+
 
 Usage
 -----
@@ -28,7 +30,6 @@ Options:
   -c, --css [css]            The css file to use.  Default is github hosted static/docco.css.
   -t, --template [template]  The dust template to use.  Default is static/template.html.
   --title [title]            The title of the output document.  Deafult is the input file name, or '' for stdin
-  -p, --pygments             parse code blocks with pygments
 ```
 
 

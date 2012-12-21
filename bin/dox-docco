@@ -23,7 +23,6 @@ program
   .option("-c, --css [css]", "The css file to use.  Default is github hosted static/docco.css.")
   .option("-t, --template [template]", "The dust template to use.  Default is static/template.html.")
   .option("--title [title]", "The title of the output document.  Deafult is the input file name, or '' for stdin")
-  .option("-p, --pygments", "parse code blocks with pygments")
   .parse(process.argv);
 
 

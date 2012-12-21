@@ -26,7 +26,8 @@
     "dox": "~0.4.1",
     "dust.js": "~0.1.0",
     "commander": "~1.1.1",
-    "lodash": "~1.0.0-rc.2"
+    "lodash": "~1.0.0-rc.2",
+    "async": "~0.1.22"
   },
   "devDependencies": {
     "expect.js": "~0.2.0",

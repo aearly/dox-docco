@@ -4,6 +4,7 @@
   "description": "A docco-like formatter for the dox comment parser",
   "main": "lib/dox-docco.js",
   "bin": "bin/dox-docco",
+  "preferGlobal": true,
   "scripts": {
     "test": "mocha"
   },

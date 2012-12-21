@@ -1,7 +1,9 @@
 var _ = require("lodash"),
   expect = require("expect.js"),
   jsdom = require("jsdom"),
+  fs = require("fs"),
   path = require("path"),
+  exec = require("child_process").exec,
   parser = require("../lib/dox-docco"),
   simpleJs = "/* comment */\nfunction foo(bar) {return bar + 1; }";
 
@@ -78,4 +80,77 @@ describe("dox-docco basics", function () {
     });
   });
 
+});
+
+
+describe("dox-docco CLI", function () {
+  it("should work with stdin", function (done) {
+    exec("./bin/dox-docco < ./test/fixtures/sample.js", function (err, stdout, stderr) {
+      expect(stderr).to.equal("");
+      expect(err).to.equal(null);
+      dom(stdout, function ($) {
+        expect($("td.docs").length).to.equal(2);
+        done();
+      });
+    });
+  });
+
+  it("should work with an infile", function (done) {
+    exec("./bin/dox-docco -i ./test/fixtures/sample.js", function (err, stdout, stderr) {
+      expect(stderr).to.equal("");
+      expect(err).to.equal(null);
+      dom(stdout, function ($) {
+        expect($("td.docs").length).to.equal(2);
+        done();
+      });
+    });
+  });
+
+  it("should work with an outfile", function (done) {
+    exec("./bin/dox-docco -i ./test/fixtures/sample.js " +
+      "-o out.html", function (err, stdout, stderr) {
+      expect(stderr).to.equal("");
+      expect(stdout).to.equal("");
+      expect(err).to.equal(null);
+      var buffer = fs.readFileSync("out.html") + "";
+      dom(buffer, function ($) {
+        expect($("td.docs").length).to.equal(2);
+        fs.unlink("out.html", done);
+      });
+    });
+  });
+  it("should support the `title` arg", function (done) {
+    exec("./bin/dox-docco < ./test/fixtures/sample.js " +
+      "--title \"foo\"", function (err, stdout, stderr) {
+      expect(stderr).to.equal("");
+      expect(err).to.equal(null);
+      dom(stdout, function ($) {
+        expect($("td.docs").length).to.equal(2);
+        expect($("title").html()).to.equal("foo");
+        done();
+      });
+    });
+  });
+  it("should support the `template` arg", function (done) {
+    exec("./bin/dox-docco < ./test/fixtures/sample.js " +
+      "-t ./test/fixtures/override.html", function (err, stdout, stderr) {
+      expect(stderr).to.equal("");
+      expect(err).to.equal(null);
+      dom(stdout, function ($) {
+        expect($("title").html()).to.equal("OVERRIDE");
+        done();
+      });
+    });
+  });
+  it("should support the css arg", function (done) {
+    exec("./bin/dox-docco < ./test/fixtures/sample.js " +
+      "-c override.css", function (err, stdout, stderr) {
+      expect(stderr).to.equal("");
+      expect(err).to.equal(null);
+      dom(stdout, function ($) {
+        expect($("link").attr("href")).to.equal("override.css");
+        done();
+      });
+    });
+  });
 });

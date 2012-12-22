@@ -32,7 +32,6 @@ Options:
   --title [title]            The title of the output document.  Deafult is the input file name, or '' for stdin
 ```
 
-
 How does this differ from Docco?
 --------------------------------
 

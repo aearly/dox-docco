@@ -33,6 +33,17 @@
                                 <a class="pilcrow" href="#section-{@idx}{.}{/idx}">&#182;</a>
                             </div>
                             {description.full|s}
+                            {?tags}
+                            <table class="tags">
+                                <tbody>
+                                {#tags}
+                                    <tr>
+                                    <td><small><strong>@{type}</strong>{#types} [{.}]{/types} </small></td><td><strong>{name}</strong></td><td>{description}</td>
+                                    </tr>
+                                {/tags}
+                                </tbody>
+                            </table>
+                            {/tags}
                         </td>
                         <td class="code">
                             <div class="highlight">

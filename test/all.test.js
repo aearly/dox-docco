@@ -1,15 +1,16 @@
-var _ = require("lodash"),
+var
   expect = require("expect.js"),
   jsdom = require("jsdom"),
   fs = require("fs"),
   path = require("path"),
   exec = require("child_process").exec,
   parser = require("../lib/dox-docco"),
-  simpleJs = "/* comment */\nfunction foo(bar) {return bar + 1; }";
+  simpleJs = "/* comment */\nfunction foo(bar) {return bar + 1; }",
+  sampleJs = fs.readFileSync(__dirname  + "/fixtures/sample.js") + "";
 
 function dom(html, jqCallback) {
   jsdom.env(html, ["http://code.jquery.com/jquery.js"], function (err, window) {
-    expect(err).to.not.be.an(Error);
+    if (err) { throw err; }
     jqCallback(window.$);
   });
 }
@@ -17,7 +18,7 @@ function dom(html, jqCallback) {
 describe("dox-docco basics", function () {
 
   it("should fail with invalid options", function (done) {
-    parser({}, function (err, data) {
+    parser({}, function (err) {
       expect(err.message).to.equal("No buffer specified. Aborting.");
       done();
     });
@@ -66,7 +67,6 @@ describe("dox-docco basics", function () {
   });
 
   it("should allow template overrides", function (done) {
-    var override = "override.css";
     parser({
       buffer: simpleJs,
       template: path.join(__dirname, "fixtures", "override.html")
@@ -75,6 +75,19 @@ describe("dox-docco basics", function () {
       expect(data).to.be.ok();
       dom(data, function ($) {
         expect($("title").html()).to.equal("OVERRIDE");
+        done();
+      });
+    });
+  });
+
+  it("should use @param and @return tags", function (done) {
+    parser({
+      buffer: sampleJs,
+    }, function (err, data) {
+      if (err) { throw err; }
+      expect(data).to.be.ok();
+      dom(data, function ($) {
+        expect($(".tags").text()).to.contain("Foos a foo");
         done();
       });
     });

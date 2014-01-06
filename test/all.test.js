@@ -89,7 +89,7 @@ describe("dox-docco CLI", function () {
       expect(stderr).to.equal("");
       expect(err).to.equal(null);
       dom(stdout, function ($) {
-        expect($("td.docs").length).to.equal(2);
+        expect($("td.docs").length).to.equal(3);
         done();
       });
     });
@@ -100,7 +100,7 @@ describe("dox-docco CLI", function () {
       expect(stderr).to.equal("");
       expect(err).to.equal(null);
       dom(stdout, function ($) {
-        expect($("td.docs").length).to.equal(2);
+        expect($("td.docs").length).to.equal(3);
         done();
       });
     });
@@ -114,7 +114,7 @@ describe("dox-docco CLI", function () {
       expect(err).to.equal(null);
       var buffer = fs.readFileSync("out.html") + "";
       dom(buffer, function ($) {
-        expect($("td.docs").length).to.equal(2);
+        expect($("td.docs").length).to.equal(3);
         fs.unlink("out.html", done);
       });
     });
@@ -125,7 +125,7 @@ describe("dox-docco CLI", function () {
       expect(stderr).to.equal("");
       expect(err).to.equal(null);
       dom(stdout, function ($) {
-        expect($("td.docs").length).to.equal(2);
+        expect($("td.docs").length).to.equal(3);
         expect($("title").html()).to.equal("foo");
         done();
       });
